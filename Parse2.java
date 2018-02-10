@@ -55,15 +55,13 @@ public class Parse2 {
         });
     }
 
-    parsedLoginDataSet.setExtractedString (sessionTokens.get
-
-    ("error"));
-    if (parsedLoginDataSet.getExtractedString () 
-        .equals("Success")) {
+    //parsedLoginDataSet.setExtractedString (sessionTokens.get("error"));
+    //if (parsedLoginDataSet.getExtractedString () 
+        //.equals("Success")) {
             // Store the username and password in SharedPreferences after the successful login
         SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString("UserName", email);
-        editor.putString("PassWord", password);
+        editor.putString("UserName",  name2.getText().toString());
+        editor.putString("PassWord", pw.getText().toString());
         editor.commit();
         //  Message myMessage = new Message();
         //myMessage.obj = "SUCCESS";
@@ -71,17 +69,17 @@ public class Parse2 {
     }
 
     
-        else {
+        /*else {
             Intent intent = new Intent(getApplicationContext(), LoginError.class);
         intent.putExtra("LoginMessage", "Invalid Login");
         startActivity(intent);
         removeDialog(0);
-    }
+    }*/
 
     public HashMap<String, String> parseToken(String jsonResponse)
             throws Exception {
         HashMap<String, String> sessionTokens = new HashMap<String, String>();
-        if (jsonResponse != null) {
+        if (!jsonResponse.trim().equals("fail")) {
             jObject = new JSONObject(jsonResponse);
             JSONObject sessionObject = jObject.getJSONObject("output");
             //String attributeError = sessionObject.getString("error");
@@ -89,8 +87,8 @@ public class Parse2 {
             // String attributeConsumerKey = sessionObject.getString("consumer_key");
             // String attributeConsumerSecret = sessionObject
             //  .getString("consumer_secret");
-            sessionTokens.put("error", attributeError);
-            //sessionTokens.put("auth_token", attributeToken);
+           // sessionTokens.put("error", attributeError);
+            sessionTokens.put("auth_token", attributeToken);
             // sessionTokens.put("consumer_key", attributeConsumerKey);
             // sessionTokens.put("consumer_secret", attributeConsumerSecret);
         } else {
