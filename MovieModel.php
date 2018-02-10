@@ -10,69 +10,12 @@ class MovieModel extends CI_Model
     }
 
 //
-    function getAllStudentsForListView($order, $orderType)
-    {
-        $this->db->select('student_id, student_name, s_date')->from('students')->order_by($order, $orderType);    //MODIFIED
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
-    function addPerson($data)
-
-    {
-        $this->db->insert('login', $data);
-        return $this->db->insert_id();
-    }
-
-    function addHistory($data)
-
-    {
-        $this->db->insert('history', $data);
-        return $this->db->insert_id();
-    }
+ 
 
 
-    function addDonors($data)
+ 
 
-    {
-        $this->db->insert('donor', $data);
-        return $this->db->insert_id();
-    }
-
-    function addInqs($data)
-
-    {
-        $this->db->insert('search', $data);
-        return $this->db->insert_id();
-    }
-
-
-    function getAllMoviesWithPagination($order, $limit, $start)
-    {
-        $this->db->select()->from('movie')->order_by($order, 'desc')->limit($limit, $start);
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
-    function getAllMoviesWithPaginationForListView($order, $limit, $start)
-    {
-        $this->db->select('id, title, rating, genre, release_date, list_image')->from('movie')->order_by($order, 'desc')->limit($limit, $start);
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
-    function updateMovie($movieId, $movie)
-    {
-        $this->db->where('id', $movieId);
-        $this->db->update('movie', $movie);
-    }
-
-    function getMovie($movieId)
-    {
-        $this->db->select()->from('movie')->where(array('id' => $movieId));
-        $query = $this->db->get();
-        return $query->first_row('array');
-    }
+    
 
     function getLogin($name, $password)         //required model
     {
