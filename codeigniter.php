@@ -50,7 +50,7 @@ class Movie extends CI_Controller
 
 
 
-    public function check_login()  /required controller
+    public function check_login()  //required controller
     {
         $name = $_POST["name"];
         $password = $_POST["password"];
