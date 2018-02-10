@@ -28,42 +28,7 @@ class Movie extends CI_Controller
         echo json_encode($students);
     }
 
-    public function addNewStudents()
-    {
-        $id = $_POST["id"];
-        $name = $_POST["name"];
-        $date = $_POST["date"];
 
-        $data = array(
-            'student_id' => $id,
-            'student_name' => $name,
-            's_date' => $date
-        );
-        $this->MovieModel->addNewStudents($data);
-        echo true;
-    }
-
-    function addDonors()
-    {
-
-        $name = $_POST["name"];
-        $contact = $_POST["contact"];
-        $date = $_POST["date"];
-        $location = $_POST["location"];
-        $no_person = $_POST["no_person"];
-        $data = array(
-
-            'name' => $name,
-            'location ' => $location,
-            'contact ' => $contact,
-            'date ' => $date,
-            'no_person' => $no_person
-
-        );
-        $this->MovieModel->addDonors($data);
-        echo true;
-
-    }
 
 
     public function sign_up()
@@ -83,26 +48,6 @@ class Movie extends CI_Controller
         echo true;
     }
 
-    public function setHistory()
-    {
-        //$password=$_POST["password"];
-        $user_id = $_POST["user_id"];
-        $name = $_POST["name"];
-        $location = $_POST["location"];
-        $contact = $_POST["contact"];
-        $date = $_POST["date"];
-
-        $data = array(
-            'user_id' => $user_id,
-            'name' => $name,
-            'location' => $location,
-            'contact' => $contact,
-            'date' => $date
-
-        );
-        $this->MovieModel->addHistory($data);
-        echo true;
-    }
 
 
     public function check_login()  /required controller
@@ -136,30 +81,7 @@ class Movie extends CI_Controller
         }
     }
 
-    public function delete_search()
-    {
-        $name = $_POST["name"];
-        $location = $_POST["location"];
-
-        $this->MovieModel->del_search($name, $location);
-        echo true;
-
-
-    }
-
-
-    public function delete_donors()
-    {
-        $name = $_POST["name"];
-        // $location = $_POST["location"];
-        $no_person = $_POST["no_person"];
-        // $date = $_POST["date"];
-
-        $this->MovieModel->del_donor($name, $no_person);
-        echo true;
-
-
-    }
+  
 
     public function delete_inquiry()
     {
@@ -192,31 +114,3 @@ class Movie extends CI_Controller
         echo json_encode($inqs);
     }
 
-    public function getHistory()
-
-    {
-        $user_id = $_POST["user_id"];
-        $userid = $this->MovieModel->getHistory($user_id);//MODIFIED
-        echo json_encode($userid);
-    }
-
-
-    public function addInqs()
-    {
-        $name = $_POST["name"];
-        $location = $_POST["location"];
-        $contact = $_POST["contact"];
-
-
-        $data = array(
-
-            'name' => $name,
-            'location ' => $location,
-            'contact ' => $contact
-
-
-        );
-        $this->MovieModel->addInqs($data);
-        echo true;
-    }
-}
