@@ -83,14 +83,14 @@ public class Parse2 {
         HashMap<String, String> sessionTokens = new HashMap<String, String>();
         if (jsonResponse != null) {
             jObject = new JSONObject(jsonResponse);
-            JSONObject sessionObject = jObject.getJSONObject("session");
-            String attributeError = sessionObject.getString("error");
+            JSONObject sessionObject = jObject.getJSONObject("output");
+            //String attributeError = sessionObject.getString("error");
             String attributeToken = sessionObject.getString("auth_token");
             // String attributeConsumerKey = sessionObject.getString("consumer_key");
             // String attributeConsumerSecret = sessionObject
             //  .getString("consumer_secret");
             sessionTokens.put("error", attributeError);
-            sessionTokens.put("auth_token", attributeToken);
+            //sessionTokens.put("auth_token", attributeToken);
             // sessionTokens.put("consumer_key", attributeConsumerKey);
             // sessionTokens.put("consumer_secret", attributeConsumerSecret);
         } else {
