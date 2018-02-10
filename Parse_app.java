@@ -30,9 +30,9 @@ public class Parse_app {
                             //  System.out.println(response.toString());
                             // SharedPreferences preferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
                             mPreferences.edit().putString("token", authToken).commit();
-                            editor.putString("UserName", name2.getText().toString());
-                            editor.putString("PassWord", pw.getText().toString());
-                            editor.commit();
+                            mPreferences.edit().putString("UserName", name2.getText().toString());
+                             mPreferences.edit().putString("PassWord", pw.getText().toString());
+                            mPreferences.edit().commit();
                         } else {
                             //show error messgae
                         }
