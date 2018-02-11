@@ -68,6 +68,7 @@ class Movie extends CI_Controller
 	    $output['status'] = "success";
         }
         else {
+	    $output['auth_token']="null";
 	    $output['status'] = "error";
         }
         echo json_encode($output);
