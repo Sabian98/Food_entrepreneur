@@ -143,22 +143,23 @@ public class MainActivity extends Activity {
         ParsedLoginDataSet parsedLoginDataSet = new ParsedLoginDataSet();
         //ParsedLoginDataSet parsedLoginDataSet = myLoginHandler.getParsedLoginData();
         try {
-
-            /*if (response == null) {
-				System.out.println("response is null " + response);
-				Exception e = new Exception();
-				throw e;
-			}*/
-            sessionTokens = parseToken(response);
-            mSignInDbHelper.createSession(mEmailField.getText().toString(),
+                sessionTokens = parseToken(response);
+		if(sesssionTokens.get("auth_token")!="null" && sesssionTokens.get("status")!="null json Response" )
+		{
+                    mSignInDbHelper.createSession(mEmailField.getText().toString(),
                     sessionTokens.get("auth_token"));
+		}
+		else
+		{
+              //show no password/email invalid message//null json response message
+		}
             // now = Long.valueOf(System.currentTimeMillis());
             // mSignInDbHelper.createSession(mEmailField.getText().toString(),mAuthToken,now);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();//if no auth_token found
         }
-        parsedLoginDataSet.setExtractedString(sessionTokens.get("error"));
-        if (parsedLoginDataSet.getExtractedString().equals("Success")) {
+        parsedLoginDataSet.setExtractedString(sessionTokens.get("status"));
+        if (parsedLoginDataSet.getExtractedString().equals("success")) {
             // Store the username and password in SharedPreferences after the successful login
             SharedPreferences.Editor editor = mPreferences.edit();
             editor.putString("UserName", email);
@@ -166,7 +167,7 @@ public class MainActivity extends Activity {
             editor.commit();
             Message myMessage = new Message();
             myMessage.obj = "SUCCESS";
-           handler.sendMessage(myMessage);
+            handler.sendMessage(myMessage);
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginError.class);
             intent.putExtra("LoginMessage", "Invalid Login");
@@ -181,20 +182,22 @@ public class MainActivity extends Activity {
     public HashMap<String, String> parseToken(String jsonResponse)
             throws Exception {
         HashMap<String, String> sessionTokens = new HashMap<String, String>();
-        if (!jsonResponse.trim(). equals("fail")) {
+       if(jsonResponse != null) {
             jObject = new JSONObject(jsonResponse);
             JSONObject sessionObject = jObject.getJSONObject("output");
-            String attributeError = sessionObject.getString("error");
+            String attributeStatus = sessionObject.getString("status");
             String attributeToken = sessionObject.getString("auth_token");
            // String attributeConsumerKey = sessionObject.getString("consumer_key");
            // String attributeConsumerSecret = sessionObject
                    // .getString("consumer_secret");
-            sessionTokens.put("error", attributeError);
+            sessionTokens.put("status", attributeStatus);
             sessionTokens.put("auth_token", attributeToken);
             //sessionTokens.put("consumer_key", attributeConsumerKey);
            // sessionTokens.put("consumer_secret", attributeConsumerSecret);
         } else {
-            sessionTokens.put("error", "Error");
+	    String attributeStatus="null json Response"; 
+	    sessionTokens.put("status", attributeStatus);
+            //sessionTokens.put("error", "Error");
         }
         return sessionTokens;
     }
