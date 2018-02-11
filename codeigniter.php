@@ -55,15 +55,8 @@ class Movie extends CI_Controller
         $name = $_POST["name"];
         $password = $_POST["password"];
         $invalidLogin = ['invalid' => $username];
-
         $id = $this->MovieModel->getLogin($name, $password);
-       // if ($login != null) {
-           // echo "success";
-        //} else {
-           // echo "fail";
-       // }
-
-
+	$output = array();
          if($id) {
             $token['id'] = $id;
             $token['username'] = $username;
@@ -72,13 +65,12 @@ class Movie extends CI_Controller
             $token['exp'] = $date->getTimestamp() + 60*60*5;
             
             $output['auth_token'] = JWT::encode($token, "my Secret key!");
-            //$this->set_response($output, REST_Controller::HTTP_OK);
-            echo json_encode($output);
+	    $output['status'] = "success";
         }
         else {
-           //$output['auth_token']=null;
-           echo "fail";
+	    $output['status'] = "error";
         }
+        echo json_encode($output);
     }
 
   
