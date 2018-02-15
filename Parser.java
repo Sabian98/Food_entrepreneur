@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
         mSignInDbHelper.open();
 
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
-        if (!checkLoginInfo()) {
+        if (!checkLoginInfo()) {//if credentials are not stored in sharedpreferences,prompt the user to enter credentials
             signin = (Button) findViewById(R.id.btn_sign_in);
             signin.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
