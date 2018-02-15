@@ -147,7 +147,7 @@ public class MainActivity extends Activity {
 		if(sesssionTokens.get("auth_token")!="null" && sesssionTokens.get("status")!="null json Response" )
 		{
                     mSignInDbHelper.createSession(mEmailField.getText().toString(),
-                    sessionTokens.get("auth_token"));
+                    sessionTokens.get("auth_token"));   //save to database
 		}
 		else
 		{
