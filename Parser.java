@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
         String password = mPasswordField.getText().toString();
 
         DefaultHttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://yoursite.com/sessions");
+        HttpPost post = new HttpPost("http://yoursite.com/sessions"); //address of the server
         JSONObject holder = new JSONObject();
         JSONObject userObj = new JSONObject();
 
