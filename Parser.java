@@ -153,8 +153,7 @@ public class MainActivity extends Activity {
 		{
               //show no password/email invalid message//null json response message
 		}
-            // now = Long.valueOf(System.currentTimeMillis());
-            // mSignInDbHelper.createSession(mEmailField.getText().toString(),mAuthToken,now);
+     
         } catch (Exception e) {
             e.printStackTrace();//if no auth_token found
         }
